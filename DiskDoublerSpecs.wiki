@@ -1,0 +1,12 @@
+#summary DiskDoubler format reverse-engineered specs
+
+= File Formats =
+
+  * DiskDoubler1Format
+  * DiskDoubler1SingleFormat
+  * DiskDoubler2Format
+
+
+= Algorithms =
+
+  * 8: Rle8182Algorithm and optionally CompactProLzhAlgorithm

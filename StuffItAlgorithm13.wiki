@@ -1,0 +1,9 @@
+#summary StuffIt algorithm number 13 specs
+
+= Introduction =
+
+This algorithm is yet another combination of LZSS and Huffman coding. It uses a sliding window of 64kb, and two different trees for a combination of literals and lengths, and a third tree for the dictionary offset. The trees are either stored in the file, or one of five predefined trees.
+
+= Header =
+
+= Bitstream format =

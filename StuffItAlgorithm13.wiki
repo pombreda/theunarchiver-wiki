@@ -12,10 +12,10 @@ Start by setting the current literal tree to the first one. Then start the main 
 
 Read one value using the current literal tree.
 
-  * If the value is less than 256, output it as a literal and loop.
+  * If the value is less than 256, output it as a literal, set the current tree to the first one, and loop.
   * If the value is between 256 and 317 inclusive, the size of the window match is this value minus 253.
   * If the value is 318, read 10 bits from the input stream. The match size is this value plus 65.
   * If the value is 319, read 15 bits from the input stream. The match size is this value plus 65.
   * If the value is 320, the end of the data has been reached.
 
-Next, read another value using the offset tree. This is the length in bits of the offset value. The highest bit is always 1, except when the value is 0. The lower `n-1` bits of the offset value are then read from the input stream. The window match starts at the position of the last byte written minus the offset value. Copy the number of bytes determined by the match size calculated above to the output stream, and loop.
+Next, read another value using the offset tree. This is the length in bits of the offset value. The highest bit is always 1, except when the value is 0. The lower `n-1` bits of the offset value are then read from the input stream. The window match starts at the position of the last byte written minus the offset value. Copy the number of bytes determined by the match size calculated above to the output stream, set the current tree to the second one, and loop.

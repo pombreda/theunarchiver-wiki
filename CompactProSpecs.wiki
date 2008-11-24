@@ -1,0 +1,10 @@
+#summary Compact Pro format reverse-engineered specs
+
+= File format =
+
+To be filled out
+
+= Algorithms =
+
+  * RLE8182Algorithm - An RLE encoding
+  * CompactProLZHAlgorithm - An LZSS+Huffman encoding

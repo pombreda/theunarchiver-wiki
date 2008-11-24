@@ -6,5 +6,5 @@ To be filled out
 
 = Algorithms =
 
-  * RLE8182Algorithm - An RLE encoding
-  * CompactProLZHAlgorithm - An LZSS+Huffman encoding
+  * Rle8182Algorithm - An RLE encoding
+  * CompactProLzhAlgorithm - An LZSS+Huffman encoding

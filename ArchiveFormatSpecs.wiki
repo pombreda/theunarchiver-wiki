@@ -1,4 +1,5 @@
 #summary Information about archive formats and compression algorithms
+#labels Featured
 
 = Reverse-engineered specs =
 

@@ -1,0 +1,11 @@
+#summary Information about archive formats and compression algorithms
+
+= Reverse-engineered specs =
+
+  * StuffItSpecs
+  * CompactProSpecs
+  * DiskDoublerSpecs
+
+= Official specs =
+
+  * ZipSpecs

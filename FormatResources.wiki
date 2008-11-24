@@ -1,6 +1,0 @@
-#summary Specs and other resources describing archive formats
-
-= Zip =
-
-  * http://www.pkware.com/documents/casestudies/APPNOTE.TXT
-  * http://www.sfr-fresh.com/unix/misc/zip232.tar.gz:a/zip-2.32/proginfo/extra.fld

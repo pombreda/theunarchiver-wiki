@@ -1,4 +1,4 @@
-#summary Information about the StuffIt file formats and algorithms
+#summary StuffIt format reverse-engineered specs
 
 = File formats =
 

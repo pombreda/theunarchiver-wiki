@@ -56,21 +56,21 @@ while ( Range <= Half) {
 
 Each model used by the Arsenic coder has the following parameters
 
- * symtot: Total frequency of all symbols in model
- * increment: Amount to increase a frequency when a symbol is found
- * freqlimit: Maximum frequency 'symtot' can reach before reducing the model. (that is no reduction until symtot > freqlimit)
- * symbols: Values of the symbols to be output
- * frequencies: Frequencies for each symbol. The initial frequency is the same for all symbols, and is equal to the increment
-   (alternatively and as in MACM, cumulative frequencies for each symbol can be kept, with a 0 for the first symbol, to give the symlow values. The symhigh values would be symlow for the next symbol up, with symtot being the last symhigh)
+  * symtot: Total frequency of all symbols in model
+  * increment: Amount to increase a frequency when a symbol is found
+  * freqlimit: Maximum frequency 'symtot' can reach before reducing the model. (that is no reduction until symtot > freqlimit)
+  * symbols: Values of the symbols to be output
+  * frequencies: Frequencies for each symbol. The initial frequency is the same for all symbols, and is equal to the increment
+  (alternatively and as in MACM, cumulative frequencies for each symbol can be kept, with a 0 for the first symbol, to give the symlow values. The symhigh values would be symlow for the next symbol up, with symtot being the last symhigh)
 
 Reduction of the model is accomplished by dividing all the frequencies by 2 (with rounding) and recalculating 'symtot'.
 
 The initial model is a binary one:
 
-    * symtot: 2
-    * increment: 1
-    * Symbols: (0,1)
-    * freqlimit: 256
+  * symtot: 2
+  * increment: 1
+  * Symbols: (0,1)
+  * freqlimit: 256
 
 Other models are
 

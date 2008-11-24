@@ -1,6 +1,0 @@
-#summary Reverse-engineered or otherwise unavailable information about archive formats and compression algorithms
-
-= List of formats =
-
-  * StuffItFormat
-  * CompactProFormat

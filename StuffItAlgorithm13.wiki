@@ -74,7 +74,7 @@ Next, read another value using the offset tree. This is the length in bits of th
 
 = Tables =
 
-== Meta-table codes and lengths ==
+== Meta-tree codes and lengths ==
 
 {{{
 static const int MetaCodes[37]=

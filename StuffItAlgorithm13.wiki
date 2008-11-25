@@ -52,7 +52,7 @@ A naïve example implementation follows (this avoids sorting the codes at the ex
 	}
 }}}
 
-´numcodes´ is the number of codes in the tree, and ´lengths[]´ is an array of code lengths. `Reverse()` is a function that reverses the bits in a 32-bit value, and `AddCode(code,length,value)` is a function that adds the generated code `code` of length `length` to the tree with a value of `value`.
+`numcodes` is the number of codes in the tree, and `lengths[]` is an array of code lengths. `Reverse()` is a function that reverses the bits in a 32-bit value, and `AddCode(code,length,value)` is a function that adds the generated code `code` of length `length` to the tree with a value of `value`.
 
 == Pre-defined trees ==
 

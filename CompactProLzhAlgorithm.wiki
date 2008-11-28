@@ -1,0 +1,37 @@
+#summary Specs for an LZSS-based algorithm used in some Mac archivers
+
+= Introduction =
+
+This algorithm is a combination of LZSS and Huffman coding. It uses a sliding window of 8kb, and three different prefix codes for literals, lengths, and offsets. Data is encoded in blocks of fixed size, measured in symbols read from the input bit stream.
+
+All values are read most significant bit first, starting from the most significant bit of each consecutive byte.
+
+= Block header =
+
+Each block header contains the three prefix codes used to read the data in the block.
+
+= Block data =
+
+Reading block data follows the usual LZSS pattern.
+
+  * Read a single bit from the input stream.
+  * If this bit is 1, read a byte value using the literal code and output it.
+  * If it is 0,
+    * Read a match length using the length code.
+    * Read the upper bits of the match offset using the offset code.
+    * Read the lower 6 bits of the match offset directly.
+    * Copy the match from the window starting at one byte less than the offset value before the previously output byte (that is, the offset is measured from the byte about to be output).
+
+== Block size ==
+
+Blocks are of fixed size, and there is no end-of-block marker. However, blocks are not measured in output bytes, but rather in the number of symbols read from the input stream. Thus literals increase the block position counter by 2, while window matches increase the block position counter by 3. The block ends once the block position counter reaches _or exceeds_ the block size.
+
+  * Compact Pro uses a block size of 0x1fff0.
+
+== Input stream flush ==
+
+At the end of each block, the input stream is flushed. This seems to be a direct consequence of the inner workings of the original implementation, which pre-buffers bits in blocks of 16. The correct way to get the input stream back in sync at the end of a block seems to be:
+
+  * Seek to the next byte boundary.
+  * If the number of bytes read since the start of the block data (not counting the block header) is odd, skip three bytes.
+  * if it is even, skip two bytes.

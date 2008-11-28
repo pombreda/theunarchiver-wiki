@@ -2,41 +2,41 @@
 
 = Introduction =
 
-This algorithm is yet another combination of LZSS and prefix tree coding. It uses a sliding window of 64kb, and two different trees for a combination of literals and lengths, and a third tree for the dictionary offset. The trees are either stored in the file, or one of five predefined trees.
+This algorithm is yet another combination of LZSS and Huffman coding. It uses a sliding window of 64kb, and two different prefix codes for a combination of literals and lengths, and a third prefix code for the dictionary offset. The codes are either stored in the file, or are one of five predefined codes.
 
 All values are read least significant bit first, starting from the least significant bit of each consecutive byte.
 
 = Header =
 
-The header starts with a single byte that selects the prefix trees to use for decoding the data. The four high bits of this value specify whether the trees are stored in the data stream (for value 0) or whether to use predefined tables (values 1-5).
+The header starts with a single byte that selects the prefix codes to use for decoding the data. The four high bits of this value specify whether the codes are stored in the data stream (for value 0) or whether to use predefined tables (values 1-5).
 
-== Trees in data stream ==
+== Codes in data stream ==
 
-The trees are stored as a list of code lengths. This list is itself compressed using a prefix code tree. This meta-tree has 37 entries, and is listed in the Tables section at the end of this text.
+The codes are stored as a list of code lengths. This list is itself compressed using a prefix code. This meta-code has 37 entries, and is listed in the Tables section at the end of this text.
 
-The header contains one or two combined literal-length trees with 321 entires, followed by one tree for the dictionary offset value bit lengths (not the actual offset themselves). This is of variable length, and this length is equal to the three low bits of the header byte, plus 10.
+The header contains one or two combined literal-length codes with 321 entires, followed by one code for the dictionary offset value bit lengths (not the actual offset themselves). This is of variable length, and this length is equal to the three low bits of the header byte, plus 10.
 
-If bit 3 of the header byte is set, the second tree is not included, and is assumed to be equal to the first.
+If bit 3 of the header byte is set, the second code is not included, and is assumed to be equal to the first.
 
-=== Reading a tree ===
+=== Reading a code ===
 
-To read the code lengths for one of the trees, keep a length variable that starts out at 0, and start a loop that reads codes sequentially starting from 0:
+To read the code lengths for one of the codes, keep a length variable that starts out at 0, and start a loop that reads code lengths sequentially starting from 0:
 
-First, read a value from the input stream using the meta-tree.
+First, read a value from the input stream using the meta-code.
 
-  * If this value is less than 31, set the length variable to the current code to the value plus one.
+  * If this value is less than 31, set the length variable to the value plus one.
   * If the value is 31, set the length variable to an "invalid code" marker (-1 is used in the current implementation, it is unknown if this is significant).
   * If the value is 32, increment the length variable.
   * If the value is 33, decrement the length variable.
-  * If the value is 34, read 1 bit from the input stream, and set the length of that many codes to be equal to the length variable. (This is a no-op if the bit is 0, which is somewhat strange.)
-  * If the value is 35, read 3 bits from the input stream, and set the length of that many plus 2 codes to be equal to the length variable.
-  * If the value is 36, read 6 bits from the input stream, and set the length of that many plus 10 codes to be equal to the length variable.
+  * If the value is 34, read 1 bit from the input stream, and set the length of that many code entries to be equal to the length variable. (This is a no-op if the bit is 0, which is somewhat strange.)
+  * If the value is 35, read 3 bits from the input stream, and set the length of that many plus 2 code entries to be equal to the length variable.
+  * If the value is 36, read 6 bits from the input stream, and set the length of that many plus 10 code entries to be equal to the length variable.
 
-Finally, set the length of the next code to be equal to the length variable, in addition to any codes you may have set while processing the input value. The loop until all code lengths for the current tree have been read.
+Finally, set the length of the next code entry to be equal to the length variable, in addition to any code entries you may have set while processing the input value. The loop until all code lengths for the current tree have been read.
 
 === Building the codes ===
 
-When all the code lengths for a given tree have been read, the codes themselves can be built using a variation on the algorithm given in APPNOTE.TXT for the Zip implode algorithm (see ZipSpecs). The variation is to process the codes in ascending order of length and value instead of descending, and to use 32 bits instead of 16.
+When all the code lengths for a given set of codes have been read, the bit sequences themselves can be built using a variation on the algorithm given in APPNOTE.TXT for the Zip implode algorithm (see ZipSpecs). The variation is to process the entries in ascending order of length and value instead of descending, and to use 32 bits instead of 16.
 
 A naïve example implementation follows (this avoids sorting the codes at the expense of looking through the list multiple times):
 
@@ -52,29 +52,29 @@ A naïve example implementation follows (this avoids sorting the codes at the ex
 	}
 }}}
 
-`numcodes` is the number of codes in the tree, and `lengths[]` is an array of code lengths. `Reverse()` is a function that reverses the bits in a 32-bit value, and `AddCode(code,length,value)` is a function that adds the generated code `code` of length `length` to the tree with a value of `value`.
+`numcodes` is the number of code entries in the code, and `lengths[]` is an array of code lengths. `Reverse()` is a function that reverses the bits in a 32-bit value, and `AddCode(code,length,value)` is a function that adds the generated bit string `code` of length `length` to the code tree with a value of `value`.
 
-== Pre-defined trees ==
+== Pre-defined codes ==
 
-There are five pre-defined sets of trees. These can be built using the same algorithm as described in the previous section, using pre-defined tables of code lengths. As above, the two literal tables both have 321 entries. The offset tree is, for tree sets 1 through 5, has 11, 13, 14, 11, or 11 entires. The actual lengths are listed at the end of this text, in the "Tables" section.
+There are five pre-defined sets of codes. These can be built using the same algorithm as described in the previous section, using pre-defined tables of code lengths. As above, the two literal codes both have 321 entries. The offset cod, for code sets 1 through 5, has 11, 13, 14, 11, or 11 entires. The actual lengths are listed at the end of this text, in the "Tables" section.
 
 = Decoding =
 
-Start by setting the current literal tree to the first one. Then start the main read loop:
+Start by setting the current literal code to the first one. Then start the main read loop:
 
-Read one value using the current literal tree.
+Read one value using the current literal code.
 
-  * If the value is less than 256, output it as a literal, set the current tree to the first one, and loop.
+  * If the value is less than 256, output it as a literal, set the current code to the first one, and loop.
   * If the value is between 256 and 317 inclusive, the size of the window match is this value minus 253.
   * If the value is 318, read 10 bits from the input stream. The match size is this value plus 65.
   * If the value is 319, read 15 bits from the input stream. The match size is this value plus 65.
   * If the value is 320, the end of the data has been reached.
 
-Next, read another value using the offset tree. This is the length in bits of the offset value. The highest bit is always 1, except when the value is 0. The lower `n-1` bits of the offset value are then read from the input stream. The window match starts at the position of the last byte written minus the offset value. Copy the number of bytes determined by the match size calculated above to the output stream, set the current tree to the second one, and loop.
+Next, read another value using the offset code. This is the length in bits of the offset value. The highest bit is always 1, except when the value is 0. The lower `n-1` bits of the offset value are then read from the input stream. The window match starts at the position of the last byte written minus the offset value. Copy the number of bytes determined by the match size calculated above to the output stream, set the current tree to the second one, and loop.
 
 = Tables =
 
-== Meta-tree codes and lengths ==
+== Meta-code bit sequences and lengths ==
 
 {{{
 static const int MetaCodes[37]=
@@ -94,7 +94,7 @@ static const int MetaCodeLengths[37]=
 };
 }}}
 
-== Pre-defined tree code lengths ==
+== Pre-defined code lengths ==
 
 {{{
 static const int FirstTreeLengths_1[321]=

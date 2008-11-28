@@ -24,7 +24,7 @@ Reading block data follows the usual LZSS pattern.
 
 == Block size ==
 
-Blocks are of fixed size, and there is no end-of-block marker. However, blocks are not measured in output bytes, but rather in the number of symbols read from the input stream. Thus literals increase the block position counter by 2, while window matches increase the block position counter by 3. The block ends once the block position counter reaches _or exceeds_ the block size.
+Blocks are of fixed size, and there is no end-of-block marker. However, blocks are not measured in output bytes, but rather in the number and type of symbols read from the input stream. Literals increase the block position counter by 2, while window matches increase the block position counter by 3. The block ends once the block position counter reaches _or exceeds_ the block size (that is, the last symbol of a block may overflow the block size).
 
   * Compact Pro uses a block size of 0x1fff0.
 

@@ -1,4 +1,4 @@
-#summary StuffIt algorithm number 13 specs
+#summary Specs for StuffIt algorithm number 13
 
 = Introduction =
 

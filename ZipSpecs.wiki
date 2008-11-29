@@ -9,3 +9,7 @@
 
   * http://www.winzip.com/aes_info.htm
   * http://www.winzip.com/comp_info.htm
+
+= Reverse-engineered specs =
+
+  * Method 9, Defalte64Algorithm

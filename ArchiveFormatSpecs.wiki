@@ -6,6 +6,7 @@
   * StuffItSpecs
   * CompactProSpecs
   * DiskDoublerSpecs
+  * AlZipSpecs
 
 = Official specs =
 

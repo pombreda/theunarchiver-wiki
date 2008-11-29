@@ -12,4 +12,4 @@
 
 = Reverse-engineered specs =
 
-  * Method 9, Defalte64Algorithm
+  * Method 9, Deflate64Algorithm

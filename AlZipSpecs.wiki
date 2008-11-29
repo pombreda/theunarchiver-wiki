@@ -14,6 +14,8 @@ ALZip is a Korean archive format, closely based on Zip, and using bzip2 and defl
 
 ALZip files contain an archive header, followed by file headers interleaved with compressed data, and finally an end-of-archive marker. All values larger than one byte are little-endian.
 
+In multi-volume files, each volume has an archive header and an end-of-archive marker. There is however only one file header even if a file stretches across multiple volumes.
+
 == Naming ==
 
 ALZip files are named `.alz`. Further volumes in multi-volume archives are named `.a00`, `.a01`, `.a02` and so on.
@@ -81,4 +83,6 @@ The compression methods are supposedly:
 || 0 || 4 || Magic number (`0x43 0x4c 0x5a 0x01`, "CLZ\001") ||
 || 4 || 4 || Unknown ||
 || 8 || 4 || Unknown, possible CRC32, sometimes 0 ||
-|| 12 || 4 || Magic number 2 (`0x43 0x4c 0x5a 0x02`, "CLZ\001") ||
+|| 12 || 4 || Magic number 2 ||
+
+The "Magic number 2" value is `0x43 0x4c 0x5a 0x02`, "CLZ\002" in single-volume archives and in the final volume in a multi-volume archive, and `0x43 0x4c 0x5a 0x03`, "CLZ\003" in non-final volumes of multi-volume archives.

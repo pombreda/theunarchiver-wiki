@@ -4,6 +4,8 @@
 
 This text was written by Roger Seeck. It was copied from http://www.binaryessence.com/dct/imp/en000225.htm on November 31, 2008 for archival purposes.
 
+See also InfoZipAppnoteAdditions.
+
 = Deflate64™ (Enhanced Deflate) =
 
 Deflate64™ is a slightly modified variant of the Deflate procedure. The fundamental mechanisms remained completely unchanged, only the following features were improved:

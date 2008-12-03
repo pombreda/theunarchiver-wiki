@@ -71,11 +71,11 @@ Encryption seems to use the old Zip algorithm.
 
 === Compression methods ===
 
-The compression methods are supposedly:
+The compression methods are:
   * 0: No compression
   * 1: Bzip2
   * 2: Deflate
-  * 3: Unknown
+  * 3: Deflate with obfuscated initialization. See below for more information.
 
 == End of archive ==
 
@@ -86,3 +86,37 @@ The compression methods are supposedly:
 || 12 || 4 || Magic number 2 ||
 
 The "Magic number 2" value is `0x43 0x4c 0x5a 0x02`, "CLZ\002" in single-volume archives and in the final volume in a multi-volume archive, and `0x43 0x4c 0x5a 0x03`, "CLZ\003" in non-final volumes of multi-volume archives.
+
+= Obfuscated deflate =
+
+Compression method is a trivial obfuscation of the PKZIP deflate algorithm. The obfuscation consists of using a randomized order for the initial 3-bit bit lengths in the Huffman header.
+
+APPNOTE.TXT, in the "Expanding Huffman codes" section, gives the correct ordering as `   16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15`. ALZip method 3 instead calculates a randomized bit order using the following algorithm:
+
+  * Initialize the order list with the values 0..18.
+  * For each element in the list, starting from 0 and going up to 18,
+    * Calculate a random index as the current element's index modulo 6, times 3, plus a value given by the four least significant bits of the file's size.
+    * If this value is larger than 18, use the value modulo 18 instead. Note: 18, and not 19 as expected.
+    * Swap the current element with the element at this index.
+
+Or in C99 code:
+
+{{{
+	int param=size%16;
+
+	for(int i=0;i<19;i++) order[i]=i;
+
+	for(int i=0;i<19;i++)
+	{
+		int swapindex=(i%6)*3+param;
+		if(swapindex>18) swapindex%=18;
+		if(swapindex!=i)
+		{
+			int tmp=order[i];
+			order[i]=order[swapindex];
+			order[swapindex]=tmp;
+		}
+	}
+}}}
+
+Where `order` is the order table being generated, and `size` is simply the uncompressed size of the file being decompressed.

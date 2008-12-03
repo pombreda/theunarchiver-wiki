@@ -67,7 +67,7 @@ The compressed data follows the file header (and optional encryption header). Th
 
 === Encryption ===
 
-Encryption seems to use the old Zip algorithm.
+The encryption algorithm used is as yet unknown.
 
 === Compression methods ===
 

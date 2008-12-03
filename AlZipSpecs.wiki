@@ -89,7 +89,7 @@ The "Magic number 2" value is `0x43 0x4c 0x5a 0x02`, "CLZ\002" in single-volume 
 
 = Obfuscated deflate =
 
-Compression method is a trivial obfuscation of the PKZIP deflate algorithm. The obfuscation consists of using a randomized order for the initial 3-bit bit lengths in the Huffman header.
+Compression method 3 is a trivial obfuscation of the PKZIP deflate algorithm. The obfuscation consists of using a randomized order for the initial 3-bit bit lengths in the Huffman header.
 
 APPNOTE.TXT, in the "Expanding Huffman codes" section, gives the correct ordering as `   16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15`. ALZip method 3 instead calculates a randomized bit order using the following algorithm:
 

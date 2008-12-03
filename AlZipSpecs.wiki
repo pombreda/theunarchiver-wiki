@@ -61,9 +61,7 @@ The known bits in the "Flags" field are as follows:
 
 Bits 4-7 of the "Flags" field determine the existence of the optional fields, and the size ("N") of the "File compressed size" and "File uncompressed size" fields. The value encoded is the number of bits used to represent the size fields. If this value is zero, none of the optional fields are included.
 
-If bit 0 of the "Flags" field is set, the file header is followed by a 12-byte encryption header.
-
-The compressed data follows the file header (and optional encryption header). The "File compressed size" can be used to seek to the next header.
+The compressed data follows the file header. The "File compressed size" can be used to seek to the next header.
 
 === Encryption ===
 

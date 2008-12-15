@@ -11,3 +11,4 @@
 = Official specs =
 
   * ZipSpecs
+  * lzma-utils beta: http://tukaani.org/lzma/header-format-20.txt

@@ -8,12 +8,24 @@ For now, I am just recording loose facts found out while investigating the forma
     * "brimstone"
       * Uses PPM?
     * "cyanide"
-      * Block-based?
-      * Uses M1FF2, so perhaps BWT?
+      * BWT based
+      * Block decode order:
+        * Decode "ternary"
+           * Uses range coder
+        * Decode M1FF2
+        * BWT-unsort
       * "M1FF2 protocol – sending the symbol to the second position if the head was accessed last time or the time before, unless the symbol accessed was already the second symbol in which case it goes to the top."
-      * "ternary encoder"
     * "darkhorse"
       * Uses range coder.
+      * Encodes "distance", "length", "literal", "recency" ("symbol"?)
+    * "iron"
+      * BWT-based
     * "blend" - Combines the three previous per-block?
     * deflate - Not sure if this is used, but exists.
-    * Various format-specific methods - mp3, jpeg, pdf...
+    * Various format-specific methods - mp3, jpeg, pdf (from v12)
+  * Range coder:
+    * 34: init 0
+    * 38: init 0
+    * 3c: init -1
+    * _normalize:
+      * 

@@ -4,6 +4,7 @@
 
 For now, I am just recording loose facts found out while investigating the format.
 
+  * Begins with "StuffIt!" or "StuffIt?".
   * Known compression methods:
     * "brimstone"
       * Uses PPM?
@@ -15,6 +16,7 @@ For now, I am just recording loose facts found out while investigating the forma
         * Decode M1FF2
         * BWT-unsort
       * "M1FF2 protocol – sending the symbol to the second position if the head was accessed last time or the time before, unless the symbol accessed was already the second symbol in which case it goes to the top."
+      * example bitstream head: (77) (00 01 60 00:size1) (00 00 01 4a:size2) (ff) (range coder stream)
     * "darkhorse"
       * Uses range coder.
       * Encodes "distance", "length", "literal", "recency" ("symbol"?)

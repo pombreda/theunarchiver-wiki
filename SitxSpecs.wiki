@@ -23,9 +23,4 @@ For now, I am just recording loose facts found out while investigating the forma
     * "blend" - Combines the three previous per-block?
     * deflate - Not sure if this is used, but exists.
     * Various format-specific methods - mp3, jpeg, pdf (from v12)
-  * Range coder:
-    * 34: init 0
-    * 38: init 0
-    * 3c: init -1
-    * _normalize:
-      * 
+  * Range coder: SitxRangeCoder

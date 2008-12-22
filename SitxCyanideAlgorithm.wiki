@@ -1,0 +1,18 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+Cyanide is a compression algorithm used by the sitx format. It is block-based, using BWT combined with M1FF2, ternary coding and range coding. It is likely based on the paper 
+[http://www.mathematik.uni-bielefeld.de/sfb343/preprints/pr99133.ps.gz "One attempt of a compression algorithm using the BWT"] by Bernhard Balkenhol and Yuri M. Shtarkov.
+
+= Details =
+
+  * Block decode order:
+    * Decode ternary sequence
+       * Uses range coder: SitxRangeCoder
+    * Decode M1FF2
+    * BWT-unsort
+  * "M1FF2 protocol – sending the symbol to the second position if the head was accessed last time or the time before, unless the symbol accessed was already the second symbol in which case it goes to the top."
+  * example block head: (77) (00 01 60 00:size1) (00 00 01 4a:size2) (ff) (range coder stream)
+
+== Ternary coder ==

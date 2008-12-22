@@ -17,24 +17,21 @@ range=-1;
 Here, `freqtable` is an array of symbol frequencies, and `num` is the number of symbols.
 
 {{{
-unsigned int totfreq=0;
-for(int i=0;i<num;i++) totfreq+=freqtable[i];
+unsigned int totalfreq=0;
+for(int i=0;i<num;i++) totalfreq+=freqtable[i];
 
-range=range/totfreq;
+range=range/totalfreq;
 unsigned int tmp=(code-low)/range;
 
-unsigned int cumfreq=0;
+unsigned int cumulativefreq=0;
 unsigned int n=0;
-do
+while(cumulativefreq+freqtable[n]<=tmp)
 {
-    cumfreq+=freqtable[n++];
+    cumulativefreq+=freqtable[n++];
 }
-while(cumfreq<=tmp);
-
-n=n-1;
 
 range=range*freqtable[n];
-low=low+range*(cumfreq-freqtable[n]);
+low=low+range*cumulativefreq;
 
 }}}
 

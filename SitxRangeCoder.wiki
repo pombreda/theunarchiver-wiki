@@ -42,10 +42,14 @@ The index of the decoded symbol is `n`. This is followed by normalization:
 == Normalization ==
 
 {{{
-while( (low^(low+range))<0x1000000 || range<0x10000 )
+for(;;)
 {
-    if( (low^(low+range))>=0x1000000 ) range=-low&0xffff;
-
+    if( (low^(low+range))>=0x1000000 )
+    {
+        if(range>=0x10000) break;
+        else range=-low&0xffff;
+    }
+    
     code=(code<<8) | NextByteFromStream();
     range=range<<8;
     low=low<<8;

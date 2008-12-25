@@ -27,13 +27,13 @@ unsigned int tmp=(code-low)/range;
 
 unsigned int cumulativefreq=0;
 unsigned int n=0;
-while(cumulativefreq+freqtable[n]<=tmp)
+while(n<num-1 && cumulativefreq+freqtable[n]<=tmp)
 {
     cumulativefreq+=freqtable[n++];
 }
 
-range=range*freqtable[n];
 low=low+range*cumulativefreq;
+range=range*freqtable[n];
 
 }}}
 

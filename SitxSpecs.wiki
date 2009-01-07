@@ -4,10 +4,9 @@
 
 For now, I am just recording loose facts found out while investigating the format.
 
-  * Begins with "StuffIt!" or "StuffIt?".
+  * Begins with `StuffIt!` or `StuffIt?`.
   * Known compression methods:
-    * "brimstone"
-      * Uses PPM?
+    * "brimstone": SitxBrimstoneAlgorithm
     * "cyanide": SitxCyanideAlgorithm
     * "darkhorse"
       * Uses range coder.

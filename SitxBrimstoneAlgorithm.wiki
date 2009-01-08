@@ -2,7 +2,7 @@
 
 = Introduction =
 
-Brimstone seems to be based on [PPMd variant G http://compression.ru/ds/], with some changes.
+Brimstone seems to be based on [http://compression.ru/ds/ PPMd variant G], with some changes.
 
 = Differences =
 

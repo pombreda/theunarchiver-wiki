@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary Reverse-engineered specs for the Cynaide algorithm from StuffIt X
 
 = Introduction =
 
@@ -63,4 +63,3 @@ These frequencies in this order are then used to read a ternary symbol from the 
 == Move-to-front coder ==
 
 == BWT sorting ==
-

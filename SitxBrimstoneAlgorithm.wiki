@@ -1,0 +1,11 @@
+#summary Reverse-engineered specs for the Brimstone algorithm from StuffIt X
+
+= Introduction =
+
+Brimstone seems to be based on [PPMd variant G http://compression.ru/ds/], with some changes.
+
+= Differences =
+
+  * The first 128 states of MaxContext in the initialization are given the frequency 2. The last 128 are given the frequency 1 as in the original.
+  * Different suballocator?
+  * ...

@@ -13,8 +13,8 @@ The data stream is made up of blocks of varying size. Each block begins with a b
 
 || *Offset * || *Size* || *Meaning* ||
 || 0 || 1 || Marker byte. ||
-|| 1 || 4 || Block size ||
-|| 5 || 4 || Index of first byte ||
+|| 1 || 4? || Block size ||
+|| 5 || 4? || Index of first byte ||
 || 9 || 1 || Number of symbols ||
 
 All values are big-endian. The marker byte is 0x77 for each block containing data, and 0xff at the end of the stream (in this case, the rest of the fields are not included).
@@ -50,15 +50,35 @@ Next, the frequencies are sorted in ascending order before reading each symbol. 
 || a>=b || b<c || c>=a || 102 ||
 || a>=b || b>= c ||  || 210 ||
 
-These frequencies in this order are then used to read a ternary symbol from the range coder. For example, if the frequencies for 0, 1 and 2 are 10, 20 and 15, the ordering will be 021, and thus the input frequencies to the coder will be 10, 15 and 20, and if the result is the third symbol, the output ternary value will be 1.
+Finally, each frequency is temporarily increased by one. These frequencies in this order are then used to read a ternary symbol from the range coder. For example, if the frequencies for 0, 1 and 2 are 10, 20 and 15, the ordering will be 021, and thus the input frequencies to the coder will be 11, 16 and 21, and if the result is the third symbol, the output ternary value will be 1.
 
-=== Renormalizing the ternary frequenceies ===
+All frequencies are intialized to 0 at the beginning of decoding.
+
+=== Adjusting and renormalizing the ternary frequenceies ===
+
+After reading a ternary symbol, the frequencies in the set used are adjusted. There are two different ways this can happen. This behaviour is controlled in part by a flag, which is set at intialization.
+
+If the symbol read was a 0, and if is the context was 000, and the flag is cleared, a special case is triggered. In this case, the three frequencies are divided by 2, rounding down, and the frequency for the current symbol (which in this case is always 0) is increased by three. The flag is then set.
+
+In the usual case, which happens if the conditions above are not met, the following happens:
+
+  * If the symbol read was not 0, the flag is cleared.
+  * The frequencies (including the added ones) are summed.
+  * A limit is selected. If the flag is cleared, the limit is 128. If it is set, the limit is 4096.
+  * If the sum of the frequencies exceeds the limit, the frequencies (not including the added ones) are halved, rounding down.
+  * The frequency for the symbol read is increased by two.
 
 === Reading the larger values ===
 
+If the ternary symbol was a 2, we need to read the actual value from the input stream. The value is encoded as two parts: The number of bits it contains, and the bits themselves. As the top bit will always be a 1, this is not transmitted.
+
 ==== Reading the high bit ====
 
+
+
 ==== Reading the lower bits ====
+
+==== Bumping and renormalizing the frequencies ====
 
 == Move-to-front coder ==
 

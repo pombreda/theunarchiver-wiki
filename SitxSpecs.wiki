@@ -1,10 +1,60 @@
 #summary Reverse-engineered specs for the sitx format.
 
-= Details =
+= Marker =
 
-For now, I am just recording loose facts found out while investigating the format.
+StuffIt X files begin with `StuffIt!` or `StuffIt?`.
 
-  * Begins with `StuffIt!` or `StuffIt?`.
+= Header =
+
+== P2 Universal Code ==
+
+Many values in StuffIt X files are encoded using a universal code apparently called "P2". These values can be decoded as follows:
+
+  * Read and count bits, stopping when you encounter a 0 bit.
+  * The number of bits read (including the final 0) is the number of 1 bits in the value.
+  * Read bits until you have read as many 1 bits as the previously determined count.
+  * The final value is the value encoded by this bit string, interpreted as starting with the least significant bit, minus 1.
+
+Bits are read starting from the least significant bit of every successive byte, similarly to the Zip format.
+
+=== Examples ===
+
+  * 0: 0 1
+  * 1: 0 01
+  * 2: 10 11
+  * 3: 0 001
+  * 4: 110 101
+  * 5: 110 011
+  * 6: 1110 111
+  * 14: 11110 1111
+  * 15: 0 00001
+  * 16: 10 10001
+
+
+== Elements ==
+
+The main data in the header is encoded as a series of "elements". These are identified by a numerical ID, and contain a series of flags followed by a possible data section. An element header is parsed as follows:
+
+  * Synchronize to a byte boundary.
+  * Read a single bit flag (meaning unknown).
+  * Read the element ID as a P2 value.
+  * Loop through the flags:
+    * Read a flag key as a P2 value.
+    * If the key is 0, stop the loop.
+    * Otherwise, read the flag value as a P2 value.
+  * Loop through the algorithm list:
+    * Read an algorithm key as a P2 value.
+    * If the key is 0, stop the loop.
+    * Otherwise, read the algorithm value as a P2 value.
+
+This may be followed by a data payload.
+
+== Data block streams ==
+
+Some elements contain a data stream. This is encoded as series of blocks. Each block is preceeded by the block size encoded as a P2 value. This value is always placed on a byte boundary, and the following data also starts at a byte boundary. If the length is 0, this marks the end of the stream. Apparently, every data-containing block contains two of these data streams. The streams may be of zero length.
+
+= Compression algorithms =
+
   * Known compression methods:
     * "brimstone": SitxBrimstoneAlgorithm
     * "cyanide": SitxCyanideAlgorithm

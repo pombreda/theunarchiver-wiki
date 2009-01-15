@@ -70,16 +70,35 @@ In the usual case, which happens if the conditions above are not met, the follow
 
 === Reading the larger values ===
 
-If the ternary symbol was a 2, we need to read the actual value from the input stream. The value is encoded as two parts: The number of bits it contains, and the bits themselves. As the top bit will always be a 1, this is not transmitted.
+If the ternary symbol was a 2, we need to read the actual value from the input stream. The value is encoded as two parts: The number of bits it contains, and the bits themselves.
 
-==== Reading the high bit ====
+This is done by partitioning the possible values into several groups. The partitioning is dependent on the "number of symbols" value in the block header. The first parition contains one symbol, 2. The second contains two symbols, 3 and 4. The third contains four, and so on. However, if the last partition does not have enough symbols (as determined by the upper limit on the total number of symbols given by the "number of symbols" field) to fill it up to a full power of two, all the symbols from that parition will be added to the previous partition instead. So if the number of symbols is 9, the partitions will be (2), (3,4), (5,6,7,8,9,10).
 
-
-
-==== Reading the lower bits ====
+We initialize several sets of frequencies: One containing a number of symbols equal to the number of paritions, and several sets corresponding to each partition, except for the first one. For each set of frequencies, the symbols are ordered in descending order, and their frequencies are set to 0.
 
 ==== Bumping and renormalizing the frequencies ====
 
+Whenever a symbol has been read using one set of frequencies, the frequencies are re-normalized, the frequency for the symbol that was read is bumped, and the symbols are re-ordered to keep the list sorted in ascending order of frequency. The particulars vary for the different parts of the algorithm, but the common steps are as follows:
+
+  * The frequencies are summed.
+  * If the sum of the frequencies exceed or equal a given limit, all frequencies are divided by 2, rounding up.
+  * The frequency of the symbol that was last read is increased by one.
+  * If this frequency is now larger than the frequency of the symbol following it, this symbol is then moved upwards until it is placed just below the first frequency equal to or larger than its new value.
+
+==== Reading the high bit ====
+
+After encountering a ternary symbol of value 2, we first read the value of the high bit of the next symbol. More accurately, we read the index of the parition to use to read the full value, as described earlier.
+
+To read this bit, we use the set of frequencies with the same number of entries as the number of partitions. After reading the index using these frequencies, we then bump the frequency of the symbol found using a limit of 256. We then bump it a second time, in its new position, with no upper limit on the total frequency (or simply a limit larger than 256).
+
+==== Reading the lower bits ====
+
+If the index read in the previous step was 0, we can immediately output a 2, as that is the only symbol in the first parition. If it was larger than 0, we pick the frequency set corresponding to that parition, and read the actual symbol using those frequencies. We then bump the frequency of the symbol read using a limit equal to the number of symbols in the partition times 128, or 0x4000, whichever is smaller. This frequency is only bumped once.
+
 == Move-to-front coder ==
 
+After reading all the symbols in a block, the data is then untransformed using a reverse move-to-front coding. A variant of move-to-front usually called M1FF2 is used, where a symbol is moved to the second position when accessed instead of the first, except when the second symbol itself is accessed and the first symbol was not accessed last time, in which case it is moved to the first position.
+
 == BWT sorting ==
+
+Finally, a reverse Burrows-Wheeler transform is applied. This seems to be similar to a normal BWT transform, except that the symbols are restored starting from the end of the block. (More investigation needed.)

@@ -70,7 +70,7 @@ This may be followed by further data, and a data payload.
 
 === Element types ===
 
-|| *Element ID* || Name || Contents || *Data payload*|| *Meaning* ||
+|| *Element ID* || *Name* || *Contents* || *Data payload*|| *Meaning* ||
 || 0 || End || || No || End of archive ||
 || 1 || Data || || Yes || A data stream ||
 || 2 || File || || No || Defines a file in the directory tree structure. Parent flag gives the parent directory. ||
@@ -80,7 +80,7 @@ This may be followed by further data, and a data payload.
 || 6 || Clue || N bytes || No || Contains N bytes, starting at the next byte boundary, where N is given by the length flag, 5. ||
 || 7 || Root || 1*P2 || No || ||
 || 8 || Boundary || || No || ||
-|| 9 || || || ? || ||
+|| 9 || ? || || ? || ||
 || 10 || Receipt || || ? || ||
 || 11 || Index || || Yes || ||
 || 12 || Locator || || Yes || ||

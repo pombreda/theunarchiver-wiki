@@ -46,8 +46,48 @@ The main data in the header is encoded as a series of "elements". These are iden
     * Read an algorithm key as a P2 value.
     * If the key is 0, stop the loop.
     * Otherwise, read the algorithm value as a P2 value.
+      * If the key is 4, read a second P2 value.
 
-This may be followed by a data payload.
+This may be followed by further data, and a data payload.
+
+=== Meaning of the flags ===
+
+  * Flag 1 seems to be some kind of ID number.
+  * Flag 2 seems to be a parent reference, giving the ID number of the parent element.
+  * Flag 3 seems to also be some kind of reference.
+  * Flag 5 seems to be a length attribute. It can appear both on elements with and without a data payload. On elements with data payloads it seems to give the uncompressed size of the payload.
+
+=== Meaning of the algorithm list ===
+
+  * Key 1 seems to be the algorithm used.
+    * 0 is SitxBrimstoneAlgorithm.
+    * 1 is SitxCyanideAlgorithm.
+    * 2 might be SitxDarkhorseAlgorithm.
+    * 3 might be Deflate (or some other LZ+Huffman algorithm)?
+    * 4 is some kind of BWT algorithm, perhaps SitxIronAlgorithm.
+    * 5 is unknown, possibly "Blend", a per-block combination of the other algorithms.
+    * 6 is unknown.
+
+=== Element types ===
+
+|| *Element ID* || Name || Contents || *Data payload*|| *Meaning* ||
+|| 0 || End || || No || End of archive ||
+|| 1 || Data || || Yes || A data stream ||
+|| 2 || File || || No || Defines a file in the directory tree structure. Parent flag gives the parent directory. ||
+|| 3 || Fork || 1*P2 ||No || Ties a data stream to a file. Parent flag gives the file, flag 3 gives the data stream, flag 5 the length of the data (might not be same as the length of the data stream - solid archives?). The P2 value defines whether this is a data (0) or resource (1) fork. ||
+|| 4 || Directory || || No || Defines a directory in the directory tree structure. Parent flag gives the parent directory. ||
+|| 5 || Catalog || || Yes || Defines all metadata for the directory tree. Usually compressed with method 0. ||
+|| 6 || Clue || N bytes || No || Contains N bytes, starting at the next byte boundary, where N is given by the length flag, 5. ||
+|| 7 || Root || 1*P2 || No || ||
+|| 8 || Boundary || || No || ||
+|| 9 || || || ? || ||
+|| 10 || Receipt || || ? || ||
+|| 11 || Index || || Yes || ||
+|| 12 || Locator || || Yes || ||
+|| 13 || ID || || Yes || ||
+|| 14 || Link || || Yes || ||
+|| 15 || Segment index || || Yes || ||
+|| >10 || || || Yes || All elements larger than 10 seem to have a data payload ||
 
 == Data block streams ==
 

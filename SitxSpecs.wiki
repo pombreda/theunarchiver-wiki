@@ -4,7 +4,7 @@
 
 StuffIt X files begin with `StuffIt!` or `StuffIt?`.
 
-= Header =
+= File structure =
 
 == P2 Universal Code ==
 
@@ -30,6 +30,9 @@ Bits are read starting from the least significant bit of every successive byte, 
   * 15: 0 00001
   * 16: 10 10001
 
+== Header ==
+
+Unknown. At least two bytes after the `StuffIt!` or `StuffIt?` marker exist before the start of the elements that make up the main file structure.
 
 == Elements ==
 

@@ -2,10 +2,9 @@
 
 = Introduction =
 
-Brimstone seems to be based on [http://compression.ru/ds/ PPMd variant G], with some changes.
+Brimstone is based on [http://compression.ru/ds/ PPMd variant G], with some changes.
 
 = Differences =
 
   * The first 128 states of MaxContext in the initialization are given the frequency 2. The last 128 are given the frequency 1 as in the original.
-  * Different suballocator?
-  * ...
+  * All code related to the LastBreath variable in the suballocator is removed.

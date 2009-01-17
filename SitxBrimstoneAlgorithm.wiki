@@ -8,3 +8,4 @@ Brimstone is based on [http://compression.ru/ds/ PPMd variant G], with some chan
 
   * The first 128 states of MaxContext in the initialization are given the frequency 2. The last 128 are given the frequency 1 as in the original.
   * All code related to the LastBreath variable in the suballocator is removed.
+  * The range coder uses 65536 as the "bottom" value, instead of 32768.

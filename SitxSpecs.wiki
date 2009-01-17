@@ -51,7 +51,7 @@ The main data in the header is encoded as a series of "elements". These are iden
     * Otherwise, read the algorithm value as a P2 value.
       * If the key is 4, read a second P2 value.
 
-This may be followed by further data, and a data payload.
+This may be followed by further data, and a data stream.
 
 === Meaning of the flags ===
 
@@ -62,7 +62,7 @@ This may be followed by further data, and a data payload.
 
 === Meaning of the algorithm list ===
 
-  * Key 1 seems to be the algorithm used.
+  * Key 1 seems to be the algorithm used for the data stream.
     * 0 is SitxBrimstoneAlgorithm.
     * 1 is SitxCyanideAlgorithm.
     * 2 might be SitxDarkhorseAlgorithm.
@@ -70,6 +70,8 @@ This may be followed by further data, and a data payload.
     * 4 is some kind of BWT algorithm, perhaps SitxIronAlgorithm.
     * 5 is unknown, possibly "Blend", a per-block combination of the other algorithms.
     * 6 is unknown.
+  * Key 2 seems to be related to the data stream checksum.
+    * 0 means CRC32?
 
 === Element types ===
 
@@ -90,11 +92,13 @@ This may be followed by further data, and a data payload.
 || 13 || ID || || Yes || ||
 || 14 || Link || || Yes || ||
 || 15 || Segment index || || Yes || ||
-|| >10 || || || Yes || All elements larger than 10 seem to have a data payload ||
+|| >10 || || || Yes || All elements larger than 10 seem to have a data payload ||
 
 == Data block streams ==
 
-Some elements contain a data stream. This is encoded as series of blocks. Each block is preceeded by the block size encoded as a P2 value. This value is always placed on a byte boundary, and the following data also starts at a byte boundary. If the length is 0, this marks the end of the stream. Apparently, every data-containing block contains two of these data streams. The streams may be of zero length.
+Some elements contain a data stream. This is encoded as series of blocks. Each block is preceeded by the block size encoded as a P2 value. This value is always placed on a byte boundary, and the following data also starts at a byte boundary. If the length is 0, this marks the end of the stream.
+
+The data stream is followed by a checksum stream in the same format as the data stream. If no checksum is present, the checksum stream still exists but is of length 0.
 
 = Compression algorithms =
 

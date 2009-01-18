@@ -1,3 +1,7 @@
 #summary Reverse-engineered specs for the Darkhorse algorithm from StuffIt X
 
 = Introduction =
+
+Darkhorse is an LZSS-based algorithm, using a range coder (SitxRangeCoder).
+
+  * Encodes "distance", "length", "literal", "recency"

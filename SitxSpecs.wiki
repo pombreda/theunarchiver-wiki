@@ -36,15 +36,15 @@ Unknown. At least two bytes after the `StuffIt!` or `StuffIt?` marker exist befo
 
 == Elements ==
 
-The main data in the header is encoded as a series of "elements". These are identified by a numerical ID, and contain a series of flags followed by a possible data section. An element header is parsed as follows:
+The main data in the header is encoded as a series of "elements". These are identified by a numerical ID, and contain a series of attributes followed by an optional data section. An element header is parsed as follows:
 
   * Synchronize to a byte boundary.
   * Read a single bit flag (meaning unknown).
   * Read the element ID as a P2 value.
-  * Loop through the flags:
-    * Read a flag key as a P2 value.
+  * Loop through the attributes:
+    * Read an attribute key as a P2 value.
     * If the key is 0, stop the loop.
-    * Otherwise, read the flag value as a P2 value.
+    * Otherwise, read the attribute value as a P2 value.
   * Loop through the algorithm list:
     * Read an algorithm key as a P2 value.
     * If the key is 0, stop the loop.
@@ -53,12 +53,12 @@ The main data in the header is encoded as a series of "elements". These are iden
 
 This may be followed by further data, and a data stream.
 
-=== Meaning of the flags ===
+=== Meaning of the attributes ===
 
-  * Flag 1 seems to be some kind of ID number.
-  * Flag 2 seems to be a parent reference, giving the ID number of the parent element.
-  * Flag 3 seems to also be some kind of reference.
-  * Flag 5 seems to be a length attribute. It can appear both on elements with and without a data payload. On elements with data payloads it seems to give the uncompressed size of the payload.
+  * Attribute 1 seems to be some kind of ID number.
+  * Attribute 2 seems to be a parent reference, giving the ID number of the parent element.
+  * Attribute 3 seems to also be some kind of reference.
+  * Attribute 5 seems to be a length attribute. It can appear both on elements with and without a data payload. On elements with data payloads it seems to give the uncompressed size of the payload.
 
 === Meaning of the algorithm list ===
 
@@ -79,10 +79,10 @@ This may be followed by further data, and a data stream.
 || 0 || End || || No || End of archive ||
 || 1 || Data || || Yes || A data stream ||
 || 2 || File || || No || Defines a file in the directory tree structure. Parent flag gives the parent directory. ||
-|| 3 || Fork || 1*P2 ||No || Ties a data stream to a file. Parent flag gives the file, flag 3 gives the data stream, flag 5 the length of the data (might not be same as the length of the data stream - solid archives?). The P2 value defines whether this is a data (0) or resource (1) fork. ||
+|| 3 || Fork || 1*P2 ||No || Ties a data stream to a file. Parent attribute gives the file, attribute 3 gives the data stream, attribute 5 the length of the data (might not be same as the length of the data stream - solid archives?). The P2 value defines whether this is a data (0) or resource (1) fork. ||
 || 4 || Directory || || No || Defines a directory in the directory tree structure. Parent flag gives the parent directory. ||
 || 5 || Catalog || || Yes || Defines all metadata for the directory tree. Usually compressed with method 0. ||
-|| 6 || Clue || N bytes || No || Contains N bytes, starting at the next byte boundary, where N is given by the length flag, 5. ||
+|| 6 || Clue || N bytes || No || Contains N bytes, starting at the next byte boundary, where N is given by the length attribute, 5. ||
 || 7 || Root || 1*P2 || No || ||
 || 8 || Boundary || || No || ||
 || 9 || ? || || ? || ||

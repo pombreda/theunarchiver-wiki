@@ -13,8 +13,8 @@ The data stream is made up of blocks of varying size. Each block begins with a b
 
 || *Offset * || *Size* || *Meaning* ||
 || 0 || 1 || Marker byte. ||
-|| 1 || 4? || Block size ||
-|| 5 || 4? || Index of first byte ||
+|| 1 || 4 || Block size ||
+|| 5 || 4 || Index of first byte ||
 || 9 || 1 || Number of symbols ||
 
 All values are big-endian. The marker byte is 0x77 for each block containing data, and 0xff at the end of the stream (in this case, the rest of the fields are not included).

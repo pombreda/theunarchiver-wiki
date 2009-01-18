@@ -97,7 +97,7 @@ If the index read in the previous step was 0, we can immediately output a 2, as 
 
 == Move-to-front coder ==
 
-After reading all the symbols in a block, the data is then untransformed using a reverse move-to-front coding. A variant of move-to-front usually called M1FF2 is used, where a symbol is moved to the second position when accessed instead of the first, except when the second symbol itself is accessed and the first symbol was not accessed last time, in which case it is moved to the first position.
+After reading all the symbols in a block, the data is then untransformed using a reverse move-to-front coding. A variant of move-to-front usually called M1FF2 is used, where a symbol is moved to the second position when accessed instead of the first, except when the second symbol itself is accessed and the first symbol was not accessed last time, in which case it is moved to the first position. At the beginning of decoding, the decoder acts as if the first symbol had not been accessed previously.
 
 == BWT sorting ==
 

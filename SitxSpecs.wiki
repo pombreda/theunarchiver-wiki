@@ -100,3 +100,25 @@ This may be followed by further data, and a data stream.
 Some elements contain a data stream. This is encoded as series of blocks. Each block is preceeded by the block size encoded as a P2 value. This value is always placed on a byte boundary, and the following data also starts at a byte boundary. If the length is 0, this marks the end of the stream.
 
 The data stream is followed by a checksum stream in the same format as the data stream. If no checksum is present, the checksum stream still exists but is of length 0.
+
+== Catalog ==
+
+The catalog element contains the metadata for all files and directories in the directory tree. It is made up of a list of keys stored as P2 and values in various formats, terminated by a 0 key for every file.
+
+|| *Key* || *Data type* || *Meaning* ||
+|| 0 || || End of metadata for the current file. Bit stream is moved forward to the next byte boundary. ||
+|| 1 || String || File name. ||
+|| 2 || 64 bits || Modification date || File modification date given as ten millionths of a second since Jan 1, 1601. ||
+|| 3 || 32 bits || ? ||
+|| 4 || 32*8 bits || Finder info? ||
+|| 5 || 32*8 bits || ? ||
+|| 6 || 8+32+(32+32) bits || Unix file attributes. First 8 bits give the fields present. If 0, only a 32-bit permissions value is present. If 1, 32-bit UID and GID values are also present. ||
+|| 7 || P2 || ? ||
+|| 8 || 64 bits || Creation date || File modification date given as ten millionths of a second since Jan 1, 1601. ||
+|| 9 || String || Comment? ||
+|| 10 || P2, N strings || Some kind of path. First P2 value is a component count, then each component follows as a separate string. ||
+|| 11 || String || ? ||
+|| 12 || String || ? ||
+|| >12 || P2+? || All larger values are assumed to start with a P2 length. ||
+
+All P2 values and bit strings are packed together and not stored on byte boundaries. Strings are stored as a P2 value giving the length, followed by that many bytes which are stored at byte boundaries.

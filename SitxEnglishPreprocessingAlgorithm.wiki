@@ -1,0 +1,9 @@
+#summary Reverse-engineered specs for the "English" pre-processing algorithm from StuffIt X
+
+= Introduction =
+
+This algorithm is used to pre-process data before compression in StuffIt X.
+
+= Data stream =
+
+The data stream begins with four byte values.

@@ -70,7 +70,7 @@ This may be followed by further data, and a data stream.
     * 4 seems to be SitxDarkhorseAlgorithm again.
     * 5 is no compression. However, the data is encrypted! Seems to use RC4.
     * 6 is SitxIronAlgorithm.
-    * 7 is unknown.
+    * 7 might be the sitx JPEG compression algorithm.
   * Key 2 seems to be related to the data stream checksum.
     * 0 means CRC32?
   * Key 3 seems to be the pre-processing algorithm used on the data before compressing.

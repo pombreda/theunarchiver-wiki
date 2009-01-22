@@ -6,4 +6,21 @@ This algorithm is used to pre-process data before compression in StuffIt X.
 
 = Data stream =
 
-The data stream begins with four byte values.
+The data stream begins with four byte values. These specify four different codes used later in the data stream.
+
+   * Escape code
+   * Word code
+   * Capitalized word code
+   * Upper-case word code
+
+The algorithm also maintains a case switching flag, which is set at the beginning of the stream.
+
+To decode the stream, start a loop that works as follows:
+
+  * Read a byte.
+  * If the byte is the escape code, read another byte and output it, then loop.
+  * If the byte is one of the three word codes,
+    * ...
+  * If the byte is anything else,
+    * ...
+    * Output the byte, and loop.

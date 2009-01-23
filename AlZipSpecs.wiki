@@ -1,4 +1,4 @@
-#summary StuffIt format reverse-engineered specs
+#summary ALZip format reverse-engineered specs
 
 = Description =
 

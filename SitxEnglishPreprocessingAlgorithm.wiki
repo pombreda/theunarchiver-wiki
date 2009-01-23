@@ -21,7 +21,7 @@ To decode the stream, start a loop that works as follows:
   * If the byte is the escape code, read another byte and output it, then loop.
   * If the byte is one of the three word codes,
     * Read bytes until a byte is encountered that is not either an upper or lower case letter between a and z.
-    * Calculate a dictionary index by treating the bytes read as a number in base 52, with the most significant digit being the first read, also adding 1 to each digit. In other words, the letters a-z represent the numbers 1-26 and A-Z the numbers 27-52 (instead of 0-25 and 26-51).
+    * Calculate a dictionary index by treating the bytes read as a number in base 52, with the most significant digit being the first read, but also adding 1 to each digit. In other words, the letters a-z represent the numbers 1-26 and A-Z the numbers 27-52. (This is more properly known as a 52-adic number).
     * Look up this word in the dictionary.
     * If the code used was the upper case word code, change all letters to upper case.
     * Otherwise, if the code used was the capitalized word code, change the first letter of the word to upper case.

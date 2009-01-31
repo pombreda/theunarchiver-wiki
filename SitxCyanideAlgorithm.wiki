@@ -101,4 +101,4 @@ After reading all the symbols in a block, the data is then untransformed using a
 
 == BWT sorting ==
 
-Finally, a reverse Burrows-Wheeler transform is applied. This seems to be similar to a normal BWT transform, except that the symbols are restored starting from the end of the block. (More investigation needed.)
+Finally, a reverse Burrows-Wheeler transform is applied. This seems to be a regular BWT transform.

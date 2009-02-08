@@ -2,6 +2,6 @@
 
 = Introduction =
 
-Darkhorse is an LZSS-based algorithm, using the SitxRangeCoder. The algorithm has been reverse-engineered, but not written up yet. For now, there is only source code available:
+Darkhorse is an LZSS-based algorithm, using an LZMA-like mode of the SitxRangeCoder. The algorithm has been reverse-engineered, but not written up yet. For now, there is only source code available:
 
 http://code.google.com/p/theunarchiver/source/browse/trunk/XADMaster/XADStuffItXDarkhorseHandle.m

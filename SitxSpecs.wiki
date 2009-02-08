@@ -70,7 +70,7 @@ This may be followed by further data, and a data stream.
     * 4 is SitxBlendAlgorithm, which mixes SitxBrimstoneAlgorithm, SitxCyanideAlgorithm and SitxDarkhorseAlgorithm per-block.
     * 5 is no compression. However, the data is encrypted! The encryption is RC4, and the key is a single byte, which is the third byte in the data stream. The first two seem unimportant. The encrypted data begins with the fourth byte.
     * 6 is SitxIronAlgorithm.
-    * 7 is SitxJPEGAlgorithm.
+    * 7 is SitxJpegAlgorithm.
   * Key 2 seems to be related to the data stream checksum.
     * 0 means CRC32?
   * Key 3 seems to be the pre-processing algorithm used on the data before compressing.

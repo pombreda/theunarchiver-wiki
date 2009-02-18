@@ -12,3 +12,7 @@
 
   * ZipSpecs
   * lzma-utils beta: http://tukaani.org/lzma/header-format-20.txt
+
+= Unofficial specs =
+
+  * LHA: http://web.archive.org/web/20021219165813/http://www.osirusoft.com/joejared/lzhformat.html

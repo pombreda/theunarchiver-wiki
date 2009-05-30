@@ -23,7 +23,7 @@ Obviously, this version may not work for you, so be prepared to downgrade to 1.6
   * Support for old-style standalone .lzma archives (but not the new-style ones, yet).
   * Support for XAR archives (gzip and bzip2 only, not LZMA yet, needs support for new-style standalone .lzma).
   * Support for some more obscure Mac OS-specific Zip extensions.
-  * Support for some more old Mac OS formats: A bit more DiskDoubler modes, Compact Pro, PackIt.
+  * Support for some more old Mac OS formats: Some more DiskDoubler modes, Compact Pro, PackIt.
   * Support for ALZip.
   * Improved Tar support thanks to halcyon (http://halcy.de/).
   * Improved RPM support.

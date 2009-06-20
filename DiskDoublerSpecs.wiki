@@ -15,5 +15,5 @@
   * 4: Probably plain Huffman compression, same as StuffItAlgorithm3?
   * 6: Unknown, named "ADS" or "AD2".
   * 8: Rle8182Algorithm and optionally CompactProLzhAlgorithm, named "DD B".
-  * 9: Unknown, named "AD" or "AD1", also used by FileMaker Pro (fp3).
+  * 9: Unknown, named "AD" or "AD1".
   * 10: Unknown, named "DD1" and "DD2".

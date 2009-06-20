@@ -2,11 +2,19 @@
 
 = File Formats =
 
-  * DiskDoubler1Format
-  * DiskDoubler1SingleFormat
-  * DiskDoubler2Format
+  * DiskDoublerSingleFormat
+  * DiskDoublerArchiveFormat1
+  * DiskDoublerArchiveFormat2
 
+(See http://code.google.com/p/theunarchiver/source/browse/trunk/XADMaster/XADDiskDoublerParser.m for now.)
 
 = Algorithms =
 
-  * 8: Rle8182Algorithm and optionally CompactProLzhAlgorithm
+  * 0: No compression.
+  * 1: Unix Compress, with a possibly garbled header, named "DD A".
+  * 2: Unknown,
+  * 4: Probably plain Huffman compression, same as StuffIt?
+  * 6: Unknown, named "ADS" or "AD2".
+  * 8: Rle8182Algorithm and optionally CompactProLzhAlgorithm, named "DD B".
+  * 9: Unknown, named "AD" or "AD1", also used by FileMaker Pro (fp3).
+  * 10: Unknown, named "DD1" and "DD2".

@@ -12,7 +12,6 @@
 
   * 0: No compression.
   * 1: Unix Compress, with a possibly garbled header, named "DD A".
-  * 2: Unknown,
   * 4: Probably plain Huffman compression, same as StuffItAlgorithm3?
   * 6: Unknown, named "ADS" or "AD2".
   * 8: Rle8182Algorithm and optionally CompactProLzhAlgorithm, named "DD B".

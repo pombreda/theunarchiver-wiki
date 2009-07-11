@@ -4,6 +4,7 @@
 = Reverse-engineered specs =
 
   * StuffItSpecs
+  * SItxSpecs
   * CompactProSpecs
   * DiskDoublerSpecs
   * AlZipSpecs

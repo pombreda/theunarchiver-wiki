@@ -13,6 +13,7 @@
 
   * ZipSpecs
   * lzma-utils beta: http://tukaani.org/lzma/header-format-20.txt
+  * ARJ: http://datacompression.info/ArchiveFormats/arj.txt
 
 = Unofficial specs =
 

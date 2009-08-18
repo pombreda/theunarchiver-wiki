@@ -78,7 +78,7 @@ This may be followed by further data, and a data stream.
     * 1 is SitxBiffPreprocessingAlgorithm,
     * 2 is SitxX86PreprocessingAlgorithm,
     * 3 is SitxPeffPreprocessingAlgorithm,
-    * 4 is SitxM68KPreprocessingAlgorithm,
+    * 4 is SitxM68kPreprocessingAlgorithm,
     * 5 is SitxSparcPreprocessingAlgorithm,
     * 6 is SitxTiffPreprocessingAlgorithm,
     * 7 is SitxWavPreprocessingAlgorithm,

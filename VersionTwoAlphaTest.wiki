@@ -1,5 +1,5 @@
 #summary Information about the 2.0 alpha test
-#labels Featured
+#labels Deprecated
 
 = The Unarchiver 2.0  =
 

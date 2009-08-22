@@ -16,8 +16,8 @@
   * 3: Not used.
   * 4: Not used.
   * 5: Same algorithm as 2 with different parameter
-  * 6: DiskDoublerADAlgorithm with parameter 0x2000, named "ADS" or "AD2".
+  * 6: DiskDoublerAdAlgorithm with parameter 0x2000, named "ADS" or "AD2".
   * 7: Not used.
   * 8: Rle8182Algorithm and optionally CompactProLzhAlgorithm (with blocksize 0xfff0 instead of 0x1fff0), named "DD B".
-  * 9: DiskDoublerADAlgorithm with parameter 0x1000, named "AD" or "AD1".
+  * 9: DiskDoublerAdAlgorithm with parameter 0x1000, named "AD" or "AD1".
   * 10: Unknown, named "DD1" and "DD2".

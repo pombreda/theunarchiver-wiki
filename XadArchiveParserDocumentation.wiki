@@ -1,0 +1,7 @@
+#summary Documentation for the XADArchiveParser class
+
+= Introduction =
+
+XADArchiveParser implements the new low-level and cross-platform API in XADMaster.framework.
+
+Unfortunately, this documentation has not been written yet, so the only information available is in the [http://code.google.com/p/theunarchiver/source/browse/trunk/XADMaster/XADArchiveParser.h XADArchiveParser.h header file], and the [http://code.google.com/p/theunarchiver/source/browse/trunk/XADMaster/XADTest2.m XADTest2.m] and [http://code.google.com/p/theunarchiver/source/browse/trunk/XADMaster/XADTest3.m XADTest3.m] example programs.

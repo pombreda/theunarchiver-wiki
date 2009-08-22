@@ -27,3 +27,9 @@ The old XADArchive API still exists in 2.0, but it is now implemented on top of 
   * The old API only gives you access to certain bits of file metadata, while the new API gives you all metadata the parser has managed to find.
   * The new API is meant to be cross-platform, while the old API is Mac OS X-specific.
   * Implementing support for new formats is done by extending the new API.
+
+= Adding support for new formats and algorithms =
+
+Parsers for new formats are implemented as subclasses of XADArchiveParser. They provide methods for identifying a file, for parsing it, and for providing CSHandles to read the data from files contained in the archive.
+
+New algorithms are implemented as subclasses of CSHandle, or more likely one of its convenience subclasses, such as CSStream, CSByteStream or CSBlockStream. Each XADArchiveParser subclass handles instantiating the correct CSHandle subclasses for each file.

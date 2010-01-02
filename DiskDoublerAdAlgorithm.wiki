@@ -1,0 +1,20 @@
+#summary Reverse-engineered specs for the AD algorithm from DiskDoubler
+
+=Introduction=
+
+AD is a compression algorithm used by the old DiskDoubler application for Mac OS. It compresses the data stream as a series of blocks of fixed size (except for final blocks). The block size is either 4096 or 8192 bytes, depending on which variant is used.
+
+=Decoding=
+
+==Block header==
+
+Each block starts with a 12-byte header. Its layout is as follows:
+
+|| *Offset* || *Size* || *Meaning* ||
+|| 0 || 2 || Compressed size ||
+|| 2 || 2 || Uncompressed size ||
+|| 4 || 4 || Unknown ||
+|| 8 || 1 || XOR sum of compressed data ||
+|| 9 || 1 || Flags ||
+|| 10 || 1 || Unknown ||
+|| 11 || 1 || XOR sum of preceeding 11 bytes ||

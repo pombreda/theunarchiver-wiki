@@ -74,6 +74,6 @@ Alternately, you could treat the match lengths as a static prefix code. That cod
 || 111110 || 19 ||
 || 111111 || 20 ||
 
-=Steam footer=
+==Steam footer==
 
 The block stream is followed by a footer that contains information about the stream, and a list of offsets for all the blocks. The exact format is not yet determined.

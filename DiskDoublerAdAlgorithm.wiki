@@ -31,17 +31,44 @@ If the block is compressed, it contains a bit stream where each byte contains bi
 
   * Read one bit.
   * If this bit is zero, read eight more bits and output them as a literal byte.
-  * Otherwise if the bit is one, do the following:
-    * Read one more bit from the stream.
-    * If this bit is one, do the following:
-      * Read a 12 bit offset value.
-      * Read one more bit.
-      * If this bit is zero, copy two bytes at the given negative offset from the current position to the output buffer, and loop.
-      * If this bit is one,  read another bit.
-      * If this bit is zero, do the following:
-        * Read one more bit.
-        * If this bit is zero, copy three bytes at the given negative offset from the current position to the output buffer, and loop.
-        * Otherwise if this bit is one, copy four bytes at the given negative offset from the current position to the output buffer, and loop.
-      * If the previously mentioned bit is instead one, do the following:
-        * Read four bits of length.
-        * Copy that many plus five bytes at the given negative offset from the current position to the output buffer, and loop.
+  * Otherwise if the bit is one, read one more bit.
+  * If this bit is zero, read an eight bit offset.
+  * Otherwise if this bit is one, read a twelve bit offset.
+  * Read one more bit.
+  * If this bit is zero, copy two bytes at the given offset to the output buffer, and loop.
+  * Otherwise if this bit is one,  read another bit.
+  * If this bit is zero, do the following:
+    * Read one more bit.
+    * If this bit is zero, copy three bytes at the given offset to the output buffer, and loop.
+    * Otherwise if this bit is one, copy four bytes at the given offset to the output buffer, and loop.
+  * If the previously mentioned bit is instead one, do the following:
+    * Read four bits of length.
+    * Copy that many plus five bytes at the given offset to the output buffer, and loop.
+
+All offsets counted backwards from the position in the output buffer where the next byte is about to be written.
+
+===Length as a prefix code===
+
+Alternately, you could treat the match lengths as a static prefix code. That code would be as follows:
+
+|| *Code* || *Match length* ||
+|| 0 || 2 ||
+|| 100 || 3 ||
+|| 101 || 4 ||
+|| 110000 || 5 ||
+|| 110001 || 6 ||
+|| 110010 || 7 ||
+|| 110011 || 8 ||
+|| 110100 || 9 ||
+|| 110101 || 10 ||
+|| 110110 || 11 ||
+|| 110111 || 12 ||
+|| 111000 || 13 ||
+|| 111001 || 14 ||
+|| 111010 || 15 ||
+|| 111011 || 16 ||
+|| 111100 || 17 ||
+|| 111101 || 18 ||
+|| 111110 || 19 ||
+|| 111111 || 20 ||
+

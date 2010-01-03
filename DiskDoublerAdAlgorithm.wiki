@@ -15,10 +15,10 @@ Each block starts with a 12-byte header. Its layout is as follows:
 || *Offset* || *Size* || *Meaning* ||
 || 0 || 2 || Compressed size ||
 || 2 || 2 || Uncompressed size ||
-|| 4 || 4 || Unknown ||
+|| 4 || 4 || Unused? ||
 || 8 || 1 || XOR sum of compressed data ||
 || 9 || 1 || Flags ||
-|| 10 || 1 || Unknown ||
+|| 10 || 1 || Unused? ||
 || 11 || 1 || XOR sum of preceeding 11 bytes ||
 
 This is followed by a data stream of the size given by the "compressed size" field of the header. The simple bytewise XOR sum of this compressed data is also stored in the header.

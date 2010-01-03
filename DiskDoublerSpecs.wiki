@@ -20,4 +20,4 @@
   * 7: Not used.
   * 8: Rle8182Algorithm and optionally CompactProLzhAlgorithm (with blocksize 0xfff0 instead of 0x1fff0), named "DD B".
   * 9: DiskDoublerAdAlgorithm with block size 4096, named "AD" or "AD1".
-  * 10: Unknown, named "DD1" and "DD2".
+  * 10: DiskDoublerDdAlgorithm, named "DD1" and "DD2".

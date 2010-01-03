@@ -4,6 +4,8 @@
 
 AD is a compression algorithm used by the old DiskDoubler application for Mac OS. It compresses the data stream as a series of blocks of fixed size (except for final blocks). The block size is either 4096 or 8192 bytes, depending on which variant is used.
 
+It is a simple LZSS algorithm, with no Huffman coding, just a number of special cases for encoding matches more efficiently. It also doesn't use a sliding window, it uses the entire current block as its dictionary.
+
 =Decoding=
 
 ==Block header==
@@ -27,9 +29,19 @@ Bit 0 of the "flags" field indicates whether the block is compressed or not. An 
 
 If the block is compressed, it contains a bit stream where each byte contains bits in most-significant-bit-first order. Bit strings longer than one bit are also read most significant bit first. To decompress the stream, start a loop that does the following, and which terminates when "uncompressed size" bytes have been unpacked from the stream:
 
-* Read one bit.
-* If this bit is zero, read eight more bits and output them as a literal byte.
-* Otherwise if the bit is one, do the following:
-  * Read one more bit from the stream.
-
-
+  * Read one bit.
+  * If this bit is zero, read eight more bits and output them as a literal byte.
+  * Otherwise if the bit is one, do the following:
+    * Read one more bit from the stream.
+    * If this bit is one, do the following:
+      * Read a 12 bit offset value.
+      * Read one more bit.
+      * If this bit is zero, copy two bytes at the given negative offset from the current position to the output buffer, and loop.
+      * If this bit is one,  read another bit.
+      * If this bit is zero, do the following:
+        * Read one more bit.
+        * If this bit is zero, copy three bytes at the given negative offset from the current position to the output buffer, and loop.
+        * Otherwise if this bit is one, copy four bytes at the given negative offset from the current position to the output buffer, and loop.
+      * If the previously mentioned bit is instead one, do the following:
+        * Read four bits of length.
+        * Copy that many plus five bytes at the given negative offset from the current position to the output buffer, and loop.

@@ -18,3 +18,18 @@ Each block starts with a 12-byte header. Its layout is as follows:
 || 9 || 1 || Flags ||
 || 10 || 1 || Unknown ||
 || 11 || 1 || XOR sum of preceeding 11 bytes ||
+
+This is followed by a data stream of the size given by the "compressed size" field of the header. The simple bytewise XOR sum of this compressed data is also stored in the header.
+
+Bit 0 of the "flags" field indicates whether the block is compressed or not. An uncompressed block contains "uncompressed size" bytes of data. (It is unclear whether this data is padded, but use the "compressed size" field to find the start of the next header in any case, and do not rely on it being exactly "uncompressed size" bytes long.)
+
+==Compressed bit stream==
+
+If the block is compressed, it contains a bit stream where each byte contains bits in most-significant-bit-first order. Bit strings longer than one bit are also read most significant bit first. To decompress the stream, start a loop that does the following, and which terminates when "uncompressed size" bytes have been unpacked from the stream:
+
+* Read one bit.
+* If this bit is zero, read eight more bits and output them as a literal byte.
+* Otherwise if the bit is one, do the following:
+  * Read one more bit from the stream.
+
+

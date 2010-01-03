@@ -45,7 +45,7 @@ If the block is compressed, it contains a bit stream where each byte contains bi
     * Read four bits of length.
     * Copy that many plus five bytes at the given offset to the output buffer, and loop.
 
-All offsets counted backwards from the position in the output buffer where the next byte is about to be written.
+All offsets counted backwards from the position in the output buffer where the next byte is about to be written. Also, the last match can apparently stretch outside the block size. In this case, the match should be truncated to fit.
 
 ===Length as a prefix code===
 

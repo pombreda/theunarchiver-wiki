@@ -23,7 +23,9 @@ Each block starts with a 12-byte header. Its layout is as follows:
 
 This is followed by a data stream of the size given by the "compressed size" field of the header. The simple bytewise XOR sum of this compressed data is also stored in the header.
 
-Bit 0 of the "flags" field indicates whether the block is compressed or not. An uncompressed block contains "uncompressed size" bytes of data. (It is unclear whether this data is padded, but use the "compressed size" field to find the start of the next header in any case, and do not rely on it being exactly "uncompressed size" bytes long.)
+Bit 0 of the "flags" field indicates whether the block is compressed or not. An uncompressed block contains "uncompressed size" bytes of data. The block can apparently be padded, so "compressed size" might be larger than "uncompressed size" for an uncompressed block. Always use the "compressed size" field for seeking to the next block.
+
+Bit 1 and 2 seem to contain the number of bytes used to pad a block. Bit 3 might indicate that the larger block size is used. Other bits are also used but their meaning is unknown. None of the bits except 0 seem to be important for unpacking.
 
 ==Compressed bit stream==
 

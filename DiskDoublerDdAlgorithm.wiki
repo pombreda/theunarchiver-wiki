@@ -2,7 +2,9 @@
 
 =Introduction=
 
-DD is a compression algorithm used by the old DiskDoubler application for Mac OS. It compresses the data stream as a series of blocks of variable size.
+DD is a compression algorithm used by the old DiskDoubler application for Mac OS. It compresses the data stream as a series of blocks of variable size (up to a maximum of 0x1010e?).
+
+DD is an LZSS-like algorithm that splits the literals and offsets into two separate streams, and uses a third stream for lengths of literal runs or matches.
 
 =Decoding=
 
@@ -14,20 +16,29 @@ Each block starts with a 22-byte header. Its layout is as follows:
 || 0 || 4 || Uncompressed size ||
 || 4 || 2 || Unknown ||
 || 6 || 2 || Unknown ||
-|| 8 || 2 || Compressed size part 1 ||
-|| 10 || 2 || Compressed size part 2 ||
-|| 12 || 2 || Compressed size part 3 ||
+|| 8 || 2 || Compressed size of offsets ||
+|| 10 || 2 || Compressed size of literals ||
+|| 12 || 2 || Compressed size of run lengths ||
 || 14 || 1 || Flags ||
 || 15 || 1 || Unused? ||
-|| 16 || 1 || XOR sum of compressed data part 1 ||
-|| 17 || 1 || XOR sum of compressed data part 2 ||
-|| 18 || 1 || XOR sum of compressed data part 3 ||
+|| 16 || 1 || XOR sum of compressed offsets ||
+|| 17 || 1 || XOR sum of compressed literals ||
+|| 18 || 1 || XOR sum of compressed run lengths ||
 || 19 || 1 || XOR sum of uncompressed data ||
 || 20 || 1 || Unused? ||
 || 21 || 1 || XOR sum of preceeding 21 bytes ||
 
-==Compressed bit stream==
+==Literal stream==
+
+==Offset stream==
+
+==Run length stream==
+
+The run length stream contains a series of 8 bit run length codes encoded using a Huffman code. To decode the final output stream, start a loop that does the following:
+
+  * Read a length code from the bit stream using the Huffman coding.
+  * If the code is 0, copy a single byte from the literal stream to the output.
+  * If the code is less than 128, read an offset from the offset stream, then copy as many bytes as the code plus two (maybe) from the previous output to the output.
+  * If the code is 128 or larger, subtract 128, multiply by two, and copy that many bytes from the literal stream to the output.
 
 ==Steam footer==
-
-list of offsets for all the blocks. The exact format is not yet determined.

@@ -4,7 +4,7 @@
 
 DD is a compression algorithm used by the old DiskDoubler application for Mac OS. It compresses the data stream as a series of blocks of variable size (up to a maximum of 0x1010e?).
 
-DD is an LZSS-like algorithm that splits the literals and offsets into two separate streams, and uses a third stream for lengths of literal runs or matches.
+DD is an LZSS-like algorithm that splits the literals and offsets into two separate streams, in addition to a third stream for the lengths of literal runs and matches. All three streams are (optionally, for some) Huffman encoded.
 
 =Decoding=
 
@@ -14,8 +14,8 @@ Each block starts with a 22-byte header. Its layout is as follows:
 
 || *Offset* || *Size* || *Meaning* ||
 || 0 || 4 || Uncompressed size ||
-|| 4 || 2 || Unknown ||
-|| 6 || 2 || Unknown ||
+|| 4 || 2 || Number of literals ||
+|| 6 || 2 || Number of offsets ||
 || 8 || 2 || Compressed size of offsets ||
 || 10 || 2 || Compressed size of literals ||
 || 12 || 2 || Compressed size of run lengths ||
@@ -28,13 +28,30 @@ Each block starts with a 22-byte header. Its layout is as follows:
 || 20 || 1 || Unused? ||
 || 21 || 1 || XOR sum of preceeding 21 bytes ||
 
-==Literal stream==
+Flags: Bit 6 indicates whether the block is _un_compressed. Bit 7 indicates whether the literals block is compressed.
+
+The following block data consists of the offset, literal and run length streams. Each one is as many bytes as the compressed size field for each indicates.
+
+==Huffman coding==
+
+All stream use the same kind of Huffman coding. The Huffman parameters are transmitted at the start of each individual stream.
+
+The Huffman header starts with a 32-bit value that defines parameters for the code:
+
+|| *Bits* || 31-24 || || 12-8 || 7-3 || 2 || 1 || 0 ||
+|| *Meaning* || Number of entries || || Max code length || Number of encoded bits || Is something || || ||
 
 ==Offset stream==
 
+
+
+==Literal stream==
+
+The literal stream contains of all literal bytes of the compressed stream. Depending on bit 7 of the flag field, it is either uncompressed (if the bit is 0) or compressed using Huffman coding (if the bit is 1). If it is uncompressed, then the "number of literals" field should be equal to the "compressed size of literals" field.
+
 ==Run length stream==
 
-The run length stream contains a series of 8 bit run length codes encoded using a Huffman code. To decode the final output stream, start a loop that does the following:
+The run length stream contains a series of 8 bit run length codes encoded using Huffman coding. To decode the final output stream, start a loop that does the following:
 
   * Read a length code from the bit stream using the Huffman coding.
   * If the code is 0, copy a single byte from the literal stream to the output.

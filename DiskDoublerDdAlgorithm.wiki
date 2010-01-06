@@ -37,7 +37,7 @@ The following block data consists of the offset, literal and run length streams.
 All stream use the same kind of Huffman coding. The Huffman parameters are transmitted at the start of each individual stream. Only the lengths of the codes are stored. The Huffman header starts with a 32-bit value that defines parameters for the code:
 
 || *Bits* || 31-24 || 23-13 || 12-8 || 7-3 || 2 || 1 || 0 ||
-|| *Meaning* || Number of entries minus one || Total number of bits in header (not counting these 32 bits) || Max code length || Bits per code length || Uses zero coding || || ||
+|| *Meaning* || Number of entries minus one || Total number of bits in header || Max code length || Bits per code length || Uses zero coding || || ||
 
 This is followed by a list of code lengths for each entry. The "number of entries" field in the header indicates how many there are, up to a maximum of 256. If the "uses zero coding" bit is 0, each entry is just a bit string as long as the "bits per code length" field indicates, and gives the length of the Huffman code for that entry. If the "uses zero coding" bit is 1, each entry is preceded by a single bit. If this bit is 0, the code length for this entry is 0 (that is, it is unused), and that is all the data that is stored for that entry. If the bit is 1, it is followed by a bit string of the length given by the "bits per code length" field giving the code length.
 

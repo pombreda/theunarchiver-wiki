@@ -39,7 +39,7 @@ All stream use the same kind of Huffman coding. The Huffman parameters are trans
 The Huffman header starts with a 32-bit value that defines parameters for the code:
 
 || *Bits* || 31-24 || || 12-8 || 7-3 || 2 || 1 || 0 ||
-|| *Meaning* || Number of entries || || Max code length || Number of encoded bits || Is something || || ||
+|| *Meaning* || Number of entries || || Max code length || Number of encoded bits || Uses complex encoding || || ||
 
 ==Offset stream==
 

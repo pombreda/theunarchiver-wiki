@@ -16,14 +16,14 @@ Each block starts with a 22-byte header. Its layout is as follows:
 || 0 || 4 || Uncompressed size ||
 || 4 || 2 || Number of literals ||
 || 6 || 2 || Number of offsets ||
-|| 8 || 2 || Compressed size of offsets ||
+|| 8 || 2 || Compressed size of run lengths ||
 || 10 || 2 || Compressed size of literals ||
-|| 12 || 2 || Compressed size of run lengths ||
+|| 12 || 2 || Compressed size of offsets ||
 || 14 || 1 || Flags ||
 || 15 || 1 || Unused? ||
-|| 16 || 1 || XOR sum of compressed offsets ||
+|| 16 || 1 || XOR sum of compressed run lengths ||
 || 17 || 1 || XOR sum of compressed literals ||
-|| 18 || 1 || XOR sum of compressed run lengths ||
+|| 18 || 1 || XOR sum of compressed offsets ||
 || 19 || 1 || XOR sum of uncompressed data ||
 || 20 || 1 || Unused? ||
 || 21 || 1 || XOR sum of preceeding 21 bytes ||

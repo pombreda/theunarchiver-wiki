@@ -34,7 +34,7 @@ The following block data consists of the offset, literal and run length streams.
 
 ==Huffman coding==
 
-All stream use the same kind of Huffman coding. The Huffman parameters are transmitted at the start of each individual stream. Only the lengths of the codes are stored. The Huffman header starts with a big-endian 32-bit value that defines parameters for the code:
+All streams use the same kind of Huffman coding. The Huffman parameters are transmitted at the start of each individual stream. Only the lengths of the codes are stored. The Huffman header starts with a big-endian 32-bit value that defines parameters for the code:
 
 || *Bits* || 31-24 || 23-13 || 12-8 || 7-3 || 2 || 1 || 0 ||
 || *Meaning* || Number of entries minus one || Number of bytes of code length data || Max code length || Bits per code length || Uses zero coding || || ||

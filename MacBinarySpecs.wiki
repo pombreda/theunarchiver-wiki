@@ -252,8 +252,7 @@ The format of the header for MacBinary III is as follows:
 || 091 || Long Word || File's creation date ||
 || 095 || Long Word || File's "last modified" date. ||
 || 099 || Word || length of Get Info comment to be sent after the resource fork (if implemented, see below). ||
-|| 101 || Byte || Finder Flags, bits 0-7. (Bits 8-15 are already in byte 73)  Bit 7 - hasNoInits 
-Bit 6 - isShared Bit 5 - requiresSwitchLaunch Bit 4 - ColorReserved Bits 1-3 - color Bit 0 - isOnDesk ||
+|| 101 || Byte || Finder Flags, bits 0-7. (Bits 8-15 are already in byte 73)  Bit 7 - hasNoInits Bit 6 - isShared Bit 5 - requiresSwitchLaunch Bit 4 - ColorReserved Bits 1-3 - color Bit 0 - isOnDesk ||
 || `*`102 || Long Word || signature for indentification purposes ('mBIN') ||
 || `*`106 || Byte || script of file name (from the fdScript field of an fxInfo record) ||
 || `*`107 || Byte || extended Finder flags (from the fdXFlags field of an fxInfo record) ||

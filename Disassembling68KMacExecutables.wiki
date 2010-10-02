@@ -10,6 +10,7 @@ Here are the steps needed:
   * Copy the .rsrc file to a machine that runs IDA, and open it as a binary file. Set the processor to something suitable, such as 68000 or 68020. Let it load at the default 0 address.
   * Run the first IDC script, `mac_os_resource.idc`. It will parse the resource file structure, and create labels and comments for the various parts of the file. It will also identify all procedures referenced by the jump table used for calling across segments.
   * Run the second IDC script, `mac_os_fixjumps.idc`. This will find all `jsr` instructions that jump through the jump table, and fix their operands up so that the target can be easily identified, and set up proper code xrefs.
+  * If you later identify and disassemble more functions, you can re-run `mac_os_fixjumps.idc` to fix the `jsr` instructions in the new parts.
   * Note that `mac_os_fixjumps.idc` will indicate a jump target in the table that is two bytes off. This is to make it easier to identify the real target. The jump table contains an offset followed by a load or jump instruction. A real jump would jump to the instruction following the offset, but the script sets the reference to point at the index instead.
 
 = mac_os_resource.idc =

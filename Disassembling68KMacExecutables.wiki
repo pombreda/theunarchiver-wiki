@@ -2,7 +2,7 @@
 
 = Introduction =
 
-[http://www.hex-rays.com/idapro/ IDA] (free version available [http://www.hex-rays.com/idapro/idadownfreeware.htm here]) can disassemble 68k code just fine, but it does not understand the somewhat complicated format of old Mac OS executables. Here are two IDC scripts that help disassemble System 7 executables.
+[http://www.hex-rays.com/idapro/ IDA] can disassemble 68k code just fine, but it does not understand the somewhat complicated format of old Mac OS executables. Here are two IDC scripts that help disassemble System 7 executables.
 
 Here are the steps needed:
 

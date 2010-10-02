@@ -254,3 +254,8 @@ static main()
 	}
 }
 }}}
+
+= References = 
+
+  * http://developer.apple.com/legacy/mac/library/documentation/mac/MoreToolbox/MoreToolbox-99.html
+  * http://developer.apple.com/legacy/mac/library/documentation/mac/pdf/Processes/Segment_Manager.pdf

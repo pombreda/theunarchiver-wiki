@@ -1,10 +1,14 @@
-#summary Reverse-engineered specs DiskDoubler algorithm 2
+#summary Reverse-engineered specs DiskDoubler algorithms 2 and 5
 
 = Introduction =
 
-There's no real information here yet, only some benchmarks of the algorithm.
+DiskDoubler's algorithms numbers 2 and 5 appears to use an extremely uncommon compression method, splay tree compression. A splay tree is used like a Huffman tree to perform adaptive prefix coding. More about splay tree compression can be found at http://www.fadden.com/techmisc/hdc/lesson05.htm.
 
-See http://code.google.com/p/theunarchiver/source/browse/XADMaster/XADDiskDoublerMethod2Handle.m if you want actual information about the algorithm.
+DiskDoubler uses 256 splay trees (or optionally less, for algorithm 5) to encode individual bytes. Which tree to use for each byte is determined by the previous byte (if less than 256 trees are used, the low-order bits are used to select the tree).
+
+See http://code.google.com/p/theunarchiver/source/browse/XADMaster/XADDiskDoublerMethod2Handle.m for the specifics of the algorithm.
+
+= Benchmarks =
 
 == The Canterbury Corpus ==
 

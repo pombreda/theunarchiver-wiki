@@ -201,7 +201,7 @@ int main(int argc,const char **argv)
 {
 	if(argc!=2)
 	{
-		fprintf(stderr,"Usage: %s contexts <infile >outfile\n",argv[0]);
+		fprintf(stderr,"Usage: %s trees <infile >outfile\n",argv[0]);
 		return 1;
 	}
 

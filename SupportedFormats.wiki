@@ -55,6 +55,8 @@
 || **Format** || **Notes** || **Issue number** ||
 || Ace 2.0 || Proprietary, requires reverse engineering. || [http://code.google.com/p/theunarchiver/issues/detail?id=58 58] ||
 || StuffIt X JPEG || Propietary, hugely complicated algorithm. Would require lots of reverse engineering. Supposedly patented, but I have been unable to locate the patent (which would contain useful information about the format). || [http://code.google.com/p/theunarchiver/issues/detail?id=146 146] ||
+|| ISO || ISO 9660 CDROM filesystem images. || ||
+|| DMG || Mac OS X disk images with a HFS+ filesystem. || ||
 || PAR || Not an archive format, but recovery records for missing archive parts. || [http://code.google.com/p/theunarchiver/issues/detail?id=39 39] ||
 || SHK || Apple II archive format. || [http://code.google.com/p/theunarchiver/issues/detail?id=119 119] ||
 || Amiga compressors || The Amiga had a lot of different single-file compressors. Support for more of these would be useful. libxfd supports many of them, but is mostly 68k only. || ||

@@ -1,4 +1,4 @@
-#summary Am incomplete list of the formats supported by The Unarchiver
+#summary An incomplete list of the formats supported by The Unarchiver
 #labels Featured
 
 = Supported popular formats =

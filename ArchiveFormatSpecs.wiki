@@ -18,4 +18,4 @@
 
 = Unofficial specs =
 
-  * LHA: http://web.archive.org/web/20021219165813/http://www.osirusoft.com/joejared/lzhformat.html
+  * LHA: http://web.archive.org/web/20021219165813/http://www.osirusoft.com/joejared/lzhformat.html http://homepage1.nifty.com/dangan/en/Content/Program/Java/jLHA/Notes/Notes.html

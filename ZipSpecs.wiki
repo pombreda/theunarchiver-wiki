@@ -15,6 +15,7 @@
 
   * http://www.winzip.com/aes_info.htm
   * http://www.winzip.com/comp_info.htm
+  * WinZipJPEGErrata
 
 = Reverse-engineered specs =
 

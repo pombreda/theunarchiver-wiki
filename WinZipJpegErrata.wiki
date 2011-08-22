@@ -10,7 +10,7 @@ However, this spec has a number of omissions and errors that make it impossible 
 
 I can't guarantee that everything on this page is correct either, nor that there aren't further errors or omissions in the spec itself that I do not cover here. However, I have managed to implement a decompressor that correctly unpacks all my test cases. If anything here is unclear, you might want to look at the source code for my implementation:
 
-http://
+http://code.google.com/p/theunarchiver/source/browse/#hg%2FXADMaster%2FWinZipJPEG
 
 If you find anything obviously wrong or missing on this page, please contact me!
 
@@ -141,7 +141,7 @@ http://www.google.com/patents?vid=USPAT4791403
 
 As it contains some very large tables, it is extremely time-consuming to actually implement and be sure that you have gotten all details correct. The tables used in my implementation have been confirmed to match those found in the WinZip implementation. They can be copied from the source code found here:
 
-http://
+http://code.google.com/p/theunarchiver/source/browse/XADMaster/WinZipJPEG/ArithmeticDecoder.c
 
 *Clarification:* Fig. 18 is just an addition at the top of the diagram, while fig. 13 actually involves one addition at the top of the diagram, and removing one element (LOG(I)=0).
 

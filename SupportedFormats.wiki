@@ -15,6 +15,7 @@
 || MSI || Full || This format is also used by many other Microsoft formats, meanings that you can use The Unarchiver to extract internal data from DOC and PPT files, and others. There is probably no reason to do this, but you can. ||
 || NSIS || Extensive || Supports many different versions, starting from version 1.1o ||
 || EXE || Some || Many kinds of .exe self-extracting formats are supported. However, if you find one that is not, please post an issue on the bug tracker. ||
+|| ISO || Full || ISO 9660 CDROM filesystem images, and also .bin raw images. ||
 || Split files || Basic || Can join files named .001, .002 that do not use any extra wrapper format. ||
 
 = Supported old formats =
@@ -49,13 +50,13 @@
 || ALZip || No encryption || Archive format which is mainly popular in South Korea. Support for all known compression methods, including Bzip2, Deflate and obfuscated Deflate. ||
 || NSA, SAR || Partial || Game data file. Can unpack all files I've found. If you have ones that do not unpack, please post an issue. ||
 || NDS || Full || Nintendo DS ROM image, which can contain a file system. ||
+|| Zipx || Full || WinZip extended Zip files ||
 
 = Unsupported formats, for which support would be good to have =
 
 || **Format** || **Notes** || **Issue number** ||
 || Ace 2.0 || Proprietary, requires reverse engineering. || [http://code.google.com/p/theunarchiver/issues/detail?id=58 58] ||
 || StuffIt X JPEG || Propietary, hugely complicated algorithm. Would require lots of reverse engineering. Supposedly patented, but I have been unable to locate the patent (which would contain useful information about the format). || [http://code.google.com/p/theunarchiver/issues/detail?id=146 146] ||
-|| ISO || ISO 9660 CDROM filesystem images. || ||
 || DMG || Mac OS X disk images with a HFS+ filesystem. || ||
 || PAR || Not an archive format, but recovery records for missing archive parts. || [http://code.google.com/p/theunarchiver/issues/detail?id=39 39] ||
 || SHK || Apple II archive format. || [http://code.google.com/p/theunarchiver/issues/detail?id=119 119] ||

@@ -50,9 +50,7 @@ should actually read
 sum += (abs(Bn[x]) + abs(Bw[x])) * S[x] / S[k]
 }}}
 
-*Omission:*
-
-The DC component never participates in the calculation. Also, the value of "count" is 4 for the given example. "count" can take all values between 1 and 4, depending on position. The value of "count" for different coefficients is:
+*Omission:* The DC component never participates in the calculation. Also, the value of "count" is 4 for the given example. "count" can take all values between 1 and 4, depending on position. The value of "count" for different coefficients is:
 
 || - || 1 || 2 || 2 || 2 || 2 || 2 || 2 ||
 || 1 || 3 || 4 || 4 || 4 || 4 || 4 || 4 ||

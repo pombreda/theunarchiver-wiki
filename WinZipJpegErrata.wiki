@@ -20,7 +20,7 @@ In the following, things marked "Error" are outright wrong in the spec, "Omissio
 
 == Section 4.1.1 ==
 
-*Omission:* If the "compressed size" field is set to 0, the metadata is stored uncompressed. The "uncompressed size" contains the size number of bytes stored.
+*Omission:* If the "compressed size" field is set to 0, the metadata is stored uncompressed. The "uncompressed size" contains the number of bytes stored.
 
 == Section 5.4.1 ==
 
